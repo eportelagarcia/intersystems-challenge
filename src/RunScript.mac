@@ -3,13 +3,13 @@ ROUTINE RunScript
 Run()
 {
  #; extract files if necessary from .data/in to .data/temp
-
- #; Start time
+  #; Start time
  Set startTime = $ZHOROLOG
+ 
+ Set sys=##class(%SYS.Python).Import("sys") Do sys.path.append("/home/irisowner/dev/src")
+ Set process=##class(%SYS.Python).Import("importlib").reload(##class(%SYS.Python).Import("process"))
+ Do process.main()
 
- Set t=$ZH,sc=$ZF(-1,"/usr/irissys/bin/irispython /home/irisowner/dev/src/process.py")
-
- #; End time
  Set endTime = $ZHOROLOG
  #; Elapsed time in seconds
  Set elapsed = endTime - startTime
